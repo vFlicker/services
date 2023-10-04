@@ -1,0 +1,47 @@
+.node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  margin-bottom: 30px;
+}
+
+.title {
+  padding: 8px 20px;
+  font-weight: 500;
+}
+
+.actions {
+  display: flex;
+  gap: 5px;
+}
+
+.action {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 24px;
+  height: 24px;
+}
+
+.action.add {
+  background-color: lightgreen;
+}
+.action.change {
+  background-color: gold;
+}
+.action.remove {
+  background-color: tomato;
+}
+
+.children {
+  display: flex;
+  gap: 30px;
+}

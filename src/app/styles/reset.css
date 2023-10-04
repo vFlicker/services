@@ -78,5 +78,5 @@ a {
 
 #app {
   min-height: 100vh;
-  background-color: #F8F8F8;
+  background-color: var(--bg-app);
 }
