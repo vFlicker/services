@@ -1,12 +1,13 @@
+import { useContext } from 'react';
+
 import { NodeData } from '~/types';
 
+import { StoreContext } from '../../store';
 import { Node } from '../Node';
 
-type TreeProps = {
-  data: NodeData[];
-};
+export function Tree(): JSX.Element {
+  const { nodes } = useContext(StoreContext);
 
-export function Tree({ data }: TreeProps): JSX.Element {
   const renderNodes = (trees: NodeData[], depth: number) => {
     return trees.map((tree) => {
       if (!tree.childrenNodes.length) {
@@ -23,5 +24,5 @@ export function Tree({ data }: TreeProps): JSX.Element {
     });
   };
 
-  return <div>{renderNodes(data, 0)}</div>;
+  return <div>{renderNodes(nodes, 0)}</div>;
 }

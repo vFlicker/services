@@ -1,5 +1,7 @@
+export type Id = string;
+
 export type NodeData = {
-  id: string;
+  id: Id;
   value: string;
   childrenNodes: NodeData[];
 };
