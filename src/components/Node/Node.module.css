@@ -2,24 +2,26 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  font-size: 1.6rem;
 }
 
 .wrapper {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: .5rem;
 
-  margin-bottom: 30px;
+  margin-bottom: 3.0rem;
 }
 
 .title {
-  padding: 8px 20px;
+  padding: .8rem 2.0rem;
   font-weight: 500;
 }
 
 .actions {
   display: flex;
-  gap: 5px;
+  gap: .5rem;
 }
 
 .action {
@@ -27,8 +29,8 @@
   justify-content: center;
   align-items: center;
 
-  width: 24px;
-  height: 24px;
+  width: 2.4rem;
+  height: 2.4rem;
 }
 
 .action.add {
@@ -46,5 +48,5 @@
 
 .children {
   display: flex;
-  gap: 30px;
+  gap: 2rem;
 }

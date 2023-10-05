@@ -2,6 +2,7 @@ import './styles/index.css';
 
 import { useState } from 'react';
 
+import { Header } from '~/components/Header/Header';
 import { Tree } from '~/components/Tree';
 import {
   addNode,
@@ -86,7 +87,10 @@ export function App(): JSX.Element {
         removeNodeAction,
       }}
     >
-      <Tree />
+      <Header />
+      <main>
+        <Tree />
+      </main>
     </StoreProvider>
   );
 }
