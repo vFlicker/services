@@ -1,16 +1,22 @@
 import './styles/index.css';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Header } from '~/components/Header/Header';
 import { Tree } from '~/components/Tree';
 import {
   addNode,
+  AppStoreProvider,
+  calculateFontSize,
+  decrementZoom,
+  DEFAULT_ZOOM_VALUE,
   editNode,
+  incrementZoom,
   removeNode,
   saveNode,
-  StoreProvider,
-} from '~/store';
+  TreeStoreProvider,
+  ZOOM_VALUE,
+} from '~/stores';
 import { Id, NodeData } from '~/types';
 
 const initialNodeData: NodeData[] = [
@@ -55,7 +61,31 @@ const initialNodeData: NodeData[] = [
 ];
 
 export function App(): JSX.Element {
+  const [zoom, setZoom] = useState<ZOOM_VALUE>(DEFAULT_ZOOM_VALUE);
   const [nodes, setNodes] = useState(initialNodeData);
+
+  useEffect(() => {
+    const htmlElement = document.querySelector('html');
+
+    if (htmlElement) {
+      const newFontSize = calculateFontSize(zoom);
+      htmlElement.style.fontSize = `${newFontSize}px`;
+    }
+  }, [zoom]);
+
+  const setZoomAction = (value: ZOOM_VALUE) => {
+    setZoom(value);
+  };
+
+  const incrementZoomAction = () => {
+    const newZoomValue = incrementZoom(zoom);
+    setZoom(newZoomValue);
+  };
+
+  const decrementZoomAction = () => {
+    const newZoomValue = decrementZoom(zoom);
+    setZoom(newZoomValue);
+  };
 
   const addNodeAction = (parentNodeId: Id) => {
     const updatedNodes = addNode(parentNodeId, nodes);
@@ -78,19 +108,23 @@ export function App(): JSX.Element {
   };
 
   return (
-    <StoreProvider
-      value={{
-        nodes,
-        addNodeAction,
-        editNodeAction,
-        saveNodeAction,
-        removeNodeAction,
-      }}
+    <AppStoreProvider
+      value={{ zoom, setZoomAction, decrementZoomAction, incrementZoomAction }}
     >
-      <Header />
-      <main>
-        <Tree />
-      </main>
-    </StoreProvider>
+      <TreeStoreProvider
+        value={{
+          nodes,
+          addNodeAction,
+          editNodeAction,
+          saveNodeAction,
+          removeNodeAction,
+        }}
+      >
+        <Header />
+        <main>
+          <Tree />
+        </main>
+      </TreeStoreProvider>
+    </AppStoreProvider>
   );
 }

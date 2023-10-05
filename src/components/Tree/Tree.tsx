@@ -2,11 +2,11 @@ import { useContext } from 'react';
 
 import { NodeData } from '~/types';
 
-import { StoreContext } from '../../store';
+import { TreeStoreContext } from '../../stores';
 import { Node } from '../Node';
 
 export function Tree(): JSX.Element {
-  const { nodes } = useContext(StoreContext);
+  const { nodes } = useContext(TreeStoreContext);
 
   const renderNodes = (trees: NodeData[], depth: number) => {
     return trees.map((tree) => {

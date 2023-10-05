@@ -2,7 +2,7 @@ import { PropsWithChildren, useContext, useState } from 'react';
 
 import { Id } from '~/types';
 
-import { StoreContext } from '../../store';
+import { TreeStoreContext } from '../../stores';
 import { getColor } from './getColor';
 import classes from './Node.module.css';
 
@@ -39,7 +39,7 @@ export function Node({ id, children, editing, value, depth }: NodeProps) {
 
 function StaticField({ depth, value, id }: StaticFieldProps): JSX.Element {
   const { addNodeAction, editNodeAction, removeNodeAction } =
-    useContext(StoreContext);
+    useContext(TreeStoreContext);
 
   const isHead = depth === 0;
   const titleStyle = {
@@ -77,7 +77,7 @@ function StaticField({ depth, value, id }: StaticFieldProps): JSX.Element {
 }
 
 function EditingField({ value, id }: EditingFieldProps): JSX.Element {
-  const { saveNodeAction, removeNodeAction } = useContext(StoreContext);
+  const { saveNodeAction, removeNodeAction } = useContext(TreeStoreContext);
 
   const [nodeValue, setNodeValue] = useState(value);
 

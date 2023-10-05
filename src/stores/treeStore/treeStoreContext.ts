@@ -2,7 +2,7 @@ import { createContext } from 'react';
 
 import { Id, NodeData } from '~/types';
 
-type StoreData = {
+type TreeStore = {
   nodes: NodeData[];
 
   addNodeAction(parentNodeId: Id): void;
@@ -11,7 +11,7 @@ type StoreData = {
   removeNodeAction(id: Id): void;
 };
 
-export const StoreContext = createContext<StoreData>({
+export const TreeStoreContext = createContext<TreeStore>({
   nodes: [],
 
   addNodeAction: () => undefined,
@@ -20,4 +20,4 @@ export const StoreContext = createContext<StoreData>({
   removeNodeAction: () => undefined,
 });
 
-export const StoreProvider = StoreContext.Provider;
+export const TreeStoreProvider = TreeStoreContext.Provider;
