@@ -1,17 +1,20 @@
 import { Id, NodeData } from '~/types';
 import { generateId } from '~/utils/generateId';
 
-const createNode = (value: string): NodeData => ({
+/**
+ * Create a new node.
+ */
+const createNewNode = (): NodeData => ({
   id: generateId(),
   childrenNodes: [],
-  value: value,
+  editing: true,
+  value: '',
 });
 
 /**
  * Recursive function for adding a node.
  */
 export const addNode = (
-  value: string,
   parentNodeId: Id,
   nodeArray: NodeData[],
 ): NodeData[] => {
@@ -21,12 +24,12 @@ export const addNode = (
     if (currentNode.id === parentNodeId) {
       updatedNodes.push({
         ...currentNode,
-        childrenNodes: [...currentNode.childrenNodes, createNode(value)],
+        childrenNodes: [...currentNode.childrenNodes, createNewNode()],
       });
     } else {
       updatedNodes.push({
         ...currentNode,
-        childrenNodes: addNode(value, parentNodeId, currentNode.childrenNodes),
+        childrenNodes: addNode(parentNodeId, currentNode.childrenNodes),
       });
     }
   }
@@ -37,7 +40,27 @@ export const addNode = (
 /**
  * Recursive function for editing a node.
  */
-export const editNode = (
+export const editNode = (id: Id, nodeArray: NodeData[]): NodeData[] => {
+  const updatedNodes: NodeData[] = [];
+
+  for (const currentNode of nodeArray) {
+    if (currentNode.id === id) {
+      updatedNodes.push({ ...currentNode, editing: true });
+    } else {
+      updatedNodes.push({
+        ...currentNode,
+        childrenNodes: editNode(id, currentNode.childrenNodes),
+      });
+    }
+  }
+
+  return updatedNodes;
+};
+
+/**
+ * Recursive function for editing a node.
+ */
+export const saveNode = (
   value: string,
   id: Id,
   nodeArray: NodeData[],
@@ -46,11 +69,11 @@ export const editNode = (
 
   for (const currentNode of nodeArray) {
     if (currentNode.id === id) {
-      updatedNodes.push({ ...currentNode, value: value });
+      updatedNodes.push({ ...currentNode, value: value, editing: false });
     } else {
       updatedNodes.push({
         ...currentNode,
-        childrenNodes: editNode(value, id, currentNode.childrenNodes),
+        childrenNodes: saveNode(value, id, currentNode.childrenNodes),
       });
     }
   }

@@ -34,8 +34,11 @@
 .action.add {
   background-color: lightgreen;
 }
-.action.change {
+.action.edit {
   background-color: gold;
+}
+.action.save {
+  background-color: lightskyblue;
 }
 .action.remove {
   background-color: tomato;

@@ -10,14 +10,22 @@ export function Tree(): JSX.Element {
 
   const renderNodes = (trees: NodeData[], depth: number) => {
     return trees.map((tree) => {
+      const { id, editing, value } = tree;
+
       if (!tree.childrenNodes.length) {
         return (
-          <Node key={tree.id} id={tree.id} value={tree.value} depth={depth} />
+          <Node
+            key={id}
+            id={id}
+            value={value}
+            editing={editing}
+            depth={depth}
+          />
         );
       }
 
       return (
-        <Node key={tree.id} id={tree.id} value={tree.value} depth={depth}>
+        <Node key={id} id={id} value={value} editing={editing} depth={depth}>
           {renderNodes(tree.childrenNodes, depth + 1)}
         </Node>
       );

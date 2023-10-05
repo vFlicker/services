@@ -3,26 +3,36 @@ import './styles/index.css';
 import { useState } from 'react';
 
 import { Tree } from '~/components/Tree';
-import { addNode, editNode, removeNode, StoreProvider } from '~/store';
+import {
+  addNode,
+  editNode,
+  removeNode,
+  saveNode,
+  StoreProvider,
+} from '~/store';
 import { Id, NodeData } from '~/types';
 
 const initialNodeData: NodeData[] = [
   {
     id: '1',
     value: 'Categories',
+    editing: false,
     childrenNodes: [
       {
         id: '2',
         value: 'Category 1',
+        editing: false,
         childrenNodes: [
           {
             id: '3',
             value: 'Sub category 1',
+            editing: false,
             childrenNodes: [],
           },
           {
             id: '4',
             value: 'Sub category 2',
+            editing: false,
             childrenNodes: [],
           },
         ],
@@ -30,11 +40,13 @@ const initialNodeData: NodeData[] = [
       {
         id: '5',
         value: 'Category 2',
+        editing: false,
         childrenNodes: [],
       },
       {
         id: '6',
         value: 'Category 3',
+        editing: false,
         childrenNodes: [],
       },
     ],
@@ -44,13 +56,18 @@ const initialNodeData: NodeData[] = [
 export function App(): JSX.Element {
   const [nodes, setNodes] = useState(initialNodeData);
 
-  const addNodeAction = (value: string, parentNodeId: Id) => {
-    const updatedNodes = addNode(value, parentNodeId, nodes);
+  const addNodeAction = (parentNodeId: Id) => {
+    const updatedNodes = addNode(parentNodeId, nodes);
     setNodes(updatedNodes);
   };
 
-  const editNodeAction = (value: string, id: Id) => {
-    const updatedNodes = editNode(value, id, nodes);
+  const editNodeAction = (id: Id) => {
+    const updatedNodes = editNode(id, nodes);
+    setNodes(updatedNodes);
+  };
+
+  const saveNodeAction = (value: string, id: Id) => {
+    const updatedNodes = saveNode(value, id, nodes);
     setNodes(updatedNodes);
   };
 
@@ -61,7 +78,13 @@ export function App(): JSX.Element {
 
   return (
     <StoreProvider
-      value={{ nodes, addNodeAction, editNodeAction, removeNodeAction }}
+      value={{
+        nodes,
+        addNodeAction,
+        editNodeAction,
+        saveNodeAction,
+        removeNodeAction,
+      }}
     >
       <Tree />
     </StoreProvider>

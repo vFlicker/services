@@ -5,8 +5,9 @@ import { Id, NodeData } from '~/types';
 type StoreData = {
   nodes: NodeData[];
 
-  addNodeAction(value: string, parentNodeId: Id): void;
-  editNodeAction(value: string, id: Id): void;
+  addNodeAction(parentNodeId: Id): void;
+  editNodeAction(id: Id): void;
+  saveNodeAction(value: string, id: Id): void;
   removeNodeAction(id: Id): void;
 };
 
@@ -15,6 +16,7 @@ export const StoreContext = createContext<StoreData>({
 
   addNodeAction: () => undefined,
   editNodeAction: () => undefined,
+  saveNodeAction: () => undefined,
   removeNodeAction: () => undefined,
 });
 
