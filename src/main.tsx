@@ -1,6 +1,8 @@
 import { createRoot } from 'react-dom/client';
 
-import { App } from './app';
+import { Drag } from './components/Drag';
+
+// import { App } from './app';
 
 const rootElement = document.getElementById('app') as HTMLElement;
-createRoot(rootElement).render(<App />);
+createRoot(rootElement).render(<Drag />);
