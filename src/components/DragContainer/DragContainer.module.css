@@ -7,7 +7,7 @@
   border: 1px solid tomato;
 }
 
-.square {
+.draggableItem {
   position: absolute;
 
   width: 50px;
