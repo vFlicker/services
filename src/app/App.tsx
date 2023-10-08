@@ -2,7 +2,8 @@ import './styles/index.css';
 
 import { useEffect, useState } from 'react';
 
-import { Header } from '~/components/Header/Header';
+import { DragContainer } from '~/components/DragContainer';
+import { Header } from '~/components/Header';
 import { Tree } from '~/components/Tree';
 import {
   addNode,
@@ -18,6 +19,8 @@ import {
   ZOOM_VALUE,
 } from '~/stores';
 import { Id, NodeData } from '~/types';
+
+import classes from './App.module.css';
 
 const initialNodeData: NodeData[] = [
   {
@@ -121,8 +124,12 @@ export function App(): JSX.Element {
         }}
       >
         <Header />
-        <main>
-          <Tree />
+        <main className={classes.main}>
+          <DragContainer
+            renderElement={(onDragStart, onDrag) => (
+              <Tree onDrag={onDrag} onDragStart={onDragStart} />
+            )}
+          />
         </main>
       </TreeStoreProvider>
     </AppStoreProvider>

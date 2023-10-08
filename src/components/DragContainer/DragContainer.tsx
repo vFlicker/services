@@ -17,6 +17,9 @@ export function DragContainer({
   const [previousCoords, setPreviousCoords] = useState([0, 0]);
 
   const handleDragStart = (evt: DragEvent<HTMLDivElement>) => {
+    // Disable the built-in drag visual effect
+    evt.dataTransfer.setDragImage(new Image(), 0, 0);
+
     const container = containerRef.current;
 
     if (!container) return;
@@ -65,31 +68,14 @@ export function DragContainer({
       newTop = previousY;
     }
 
-    evt.currentTarget.style.top = `${newTop}px`;
-    evt.currentTarget.style.left = `${newLeft}px`;
+    evt.currentTarget.style.transform = `translate(${newLeft}px, ${newTop}px)`;
 
     setPreviousCoords([newLeft, newTop]);
   };
 
   return (
-    <div className={classes.container} ref={containerRef}>
+    <div className={classes.dragContainer} ref={containerRef}>
       {renderElement(handleDragStart, handleDrag)}
     </div>
-  );
-}
-
-type DraggableItemProps = {
-  onDragStart: (evt: DragEvent<HTMLDivElement>) => void;
-  onDrag: (evt: DragEvent<HTMLDivElement>) => void;
-};
-
-export function DraggableItem({ onDragStart, onDrag }: DraggableItemProps) {
-  return (
-    <div
-      className={classes.draggableItem}
-      draggable
-      onDragStart={onDragStart}
-      onDrag={onDrag}
-    ></div>
   );
 }
