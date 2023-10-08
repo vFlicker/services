@@ -12,3 +12,9 @@
   font-size: 30px;
   font-weight: 500;
 }
+
+.controls {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
