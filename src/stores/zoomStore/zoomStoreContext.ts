@@ -10,7 +10,7 @@ export const DEFAULT_ZOOM_VALUE = ZOOM_VALUES[DEFAULT_ZOOM_INDEX];
 
 export type ZOOM_VALUE = (typeof ZOOM_VALUES)[number];
 
-type AppStoreData = {
+type ZoomStoreData = {
   zoom: ZOOM_VALUE;
 
   setZoomAction(value: ZOOM_VALUE): void;
@@ -18,7 +18,7 @@ type AppStoreData = {
   decrementZoomAction(): void;
 };
 
-export const AppStoreContext = createContext<AppStoreData>({
+export const ZoomStoreContext = createContext<ZoomStoreData>({
   zoom: DEFAULT_ZOOM_VALUE,
 
   setZoomAction: () => undefined,
@@ -26,4 +26,4 @@ export const AppStoreContext = createContext<AppStoreData>({
   decrementZoomAction: () => undefined,
 });
 
-export const AppStoreProvider = AppStoreContext.Provider;
+export const ZoomStoreProvider = ZoomStoreContext.Provider;

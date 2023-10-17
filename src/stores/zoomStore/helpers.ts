@@ -1,4 +1,4 @@
-import { ZOOM_VALUE, ZOOM_VALUES } from './appStoreContext';
+import { ZOOM_VALUE, ZOOM_VALUES } from './zoomStoreContext';
 
 const DEFAULT_FONT_SIZE = 10;
 

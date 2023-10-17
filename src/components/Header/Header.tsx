@@ -1,12 +1,12 @@
 import { ChangeEvent, useContext } from 'react';
 
-import { AppStoreContext, ZOOM_VALUE, ZOOM_VALUES } from '~/stores';
+import { ZOOM_VALUE, ZOOM_VALUES, ZoomStoreContext } from '~/stores';
 
 import classes from './Header.module.css';
 
 export function Header(): JSX.Element {
   const { zoom, setZoomAction, decrementZoomAction, incrementZoomAction } =
-    useContext(AppStoreContext);
+    useContext(ZoomStoreContext);
 
   const handleZoomChange = (evt: ChangeEvent<HTMLSelectElement>) => {
     const value = parseInt(evt.target.value, 10) as ZOOM_VALUE;
