@@ -1,15 +1,15 @@
 import { ChangeEvent, useContext } from 'react';
 
-import { ZOOM_VALUE, ZOOM_VALUES, ZoomStoreContext } from '~/stores';
+import { ZOOM_VALUES, ZoomContext, ZoomValue } from '~/contexts';
 
 import classes from './Header.module.css';
 
 export function Header(): JSX.Element {
   const { zoom, setZoomAction, decrementZoomAction, incrementZoomAction } =
-    useContext(ZoomStoreContext);
+    useContext(ZoomContext);
 
   const handleZoomChange = (evt: ChangeEvent<HTMLSelectElement>) => {
-    const value = parseInt(evt.target.value, 10) as ZOOM_VALUE;
+    const value = parseInt(evt.target.value, 10) as ZoomValue;
     setZoomAction(value);
   };
 

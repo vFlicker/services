@@ -1,8 +1,8 @@
 import { DragEvent, useContext } from 'react';
 
+import { TreeContext } from '~/contexts';
 import { NodeData } from '~/types';
 
-import { TreeStoreContext } from '../../stores';
 import { Node } from '../Node';
 import classes from './Tree.module.css';
 
@@ -12,7 +12,7 @@ type TreeProps = {
 };
 
 export function Tree({ onDrag, onDragStart }: TreeProps): JSX.Element {
-  const { nodes } = useContext(TreeStoreContext);
+  const { nodes } = useContext(TreeContext);
 
   const renderNodes = (trees: NodeData[], depth: number) => {
     return trees.map((tree) => {

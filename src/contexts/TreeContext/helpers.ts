@@ -1,9 +1,6 @@
 import { Id, NodeData } from '~/types';
 import { generateId } from '~/utils/generateId';
 
-/**
- * Create a new node.
- */
 const createNewNode = (): NodeData => ({
   id: generateId(),
   childrenNodes: [],
@@ -11,9 +8,6 @@ const createNewNode = (): NodeData => ({
   value: '',
 });
 
-/**
- * Recursive function for adding a node.
- */
 export const addNode = (
   parentNodeId: Id,
   nodeArray: NodeData[],
@@ -37,9 +31,6 @@ export const addNode = (
   return updatedNodes;
 };
 
-/**
- * Recursive function for editing a node.
- */
 export const editNode = (id: Id, nodeArray: NodeData[]): NodeData[] => {
   const updatedNodes: NodeData[] = [];
 
@@ -57,9 +48,6 @@ export const editNode = (id: Id, nodeArray: NodeData[]): NodeData[] => {
   return updatedNodes;
 };
 
-/**
- * Recursive function for editing a node.
- */
 export const saveNode = (
   value: string,
   id: Id,
@@ -81,9 +69,6 @@ export const saveNode = (
   return updatedNodes;
 };
 
-/**
- * Recursive function for deleting a node.
- */
 export const removeNode = (id: Id, nodeArray: NodeData[]): NodeData[] => {
   const updatedNodes: NodeData[] = [];
 
